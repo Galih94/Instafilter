@@ -25,9 +25,9 @@ struct ContentView: View {
         let inputImage = UIImage(resource: .example)
         let beginImage = CIImage(image: inputImage)
         let context = CIContext()
-        let currentFilter = CIFilter.pixellate()
+        let currentFilter = CIFilter.crystallize()
         currentFilter.inputImage = beginImage
-        currentFilter.scale = 100
+        currentFilter.radius = 200
         
         /// get image CIImage from currentFilter
         guard let outputImage = currentFilter.outputImage else { return }
