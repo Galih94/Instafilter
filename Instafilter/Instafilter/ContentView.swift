@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct ContentView: View {
+    let example = Image(.example)
     var body: some View {
-        ShareLink(item: URL(string: "https://www.google.com")!, subject: Text("Google Here"), message: Text("Just Google it")) {
-            Label("Find out more", systemImage: "magnifyingglass.circle.fill")
+        ShareLink(item: example, preview: SharePreview("Land Preview", image: example)) {
+            Label("Land Image", systemImage: "magnifyingglass.circle.fill")
         }
     }
 }
