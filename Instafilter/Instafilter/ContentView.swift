@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        ShareLink(item: URL(string: "https://www.google.com")!)
+        ShareLink(item: URL(string: "https://www.google.com")!, subject: Text("Google Here"), message: Text("Just Google it"))
     }
 }
 
