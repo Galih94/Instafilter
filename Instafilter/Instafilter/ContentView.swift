@@ -18,6 +18,8 @@ struct ContentView: View {
     @State private var selectedItem: PhotosPickerItem?
     @State private var processedImage: Image?
     @State private var filterIntensity = 0.5
+    @State private var filterRadius = 0.5
+    @State private var filterScale = 0.5
     @State private var currentFilter: CIFilter = CIFilter.sepiaTone()
     @State private var showingFilters = false
     @State private var beginImage: CIImage?
@@ -42,13 +44,26 @@ struct ContentView: View {
                 HStack(content: {
                     Text("Intensity")
                     Slider(value: $filterIntensity, in: 0...1)
+                        .disabled(processedImage == nil)
                         .onChange(of: filterIntensity, applyProcessing)
                 })
-                .padding(.vertical)
+                HStack(content: {
+                    Text("Radius")
+                    Slider(value: $filterRadius, in: 0...1)
+                        .disabled(processedImage == nil)
+                        .onChange(of: filterRadius, applyProcessing)
+                })
+                HStack(content: {
+                    Text("Scale")
+                    Slider(value: $filterScale, in: 0...1)
+                        .disabled(processedImage == nil)
+                        .onChange(of: filterScale, applyProcessing)
+                })
                 HStack(content: {
                     Button("Change Filter") {
                         changeFilter()
                     }
+                    .disabled(processedImage == nil)
                     Spacer()
                     if let processedImage {
                         ShareLink(item: processedImage, preview: SharePreview("Instafilter Image", image: processedImage))
@@ -65,6 +80,9 @@ struct ContentView: View {
                 Button("Sepia Tone") { setFilter(CIFilter.sepiaTone()) }
                 Button("Unsharp Mask") { setFilter(CIFilter.unsharpMask()) }
                 Button("Vignette") { setFilter(CIFilter.vignette()) }
+                Button("Sobel Gradients") { setFilter(CIFilter.sobelGradients()) }
+                Button("Spot Light") { setFilter(CIFilter.spotLight()) }
+                Button("Zoom Blur") { setFilter(CIFilter.zoomBlur()) }
                 Button("Cancel", role: .cancel) { }
             }
         }
@@ -96,10 +114,10 @@ struct ContentView: View {
             currentFilter.setValue(filterIntensity, forKey: kCIInputIntensityKey)
         }
         if inputKeys.contains(kCIInputRadiusKey) {
-            currentFilter.setValue(filterIntensity * 200, forKey: kCIInputRadiusKey)
+            currentFilter.setValue(filterRadius * 200, forKey: kCIInputRadiusKey)
         }
         if inputKeys.contains(kCIInputScaleKey) {
-            currentFilter.setValue(filterIntensity * 10, forKey: kCIInputScaleKey)
+            currentFilter.setValue(filterScale * 10, forKey: kCIInputScaleKey)
         }
         guard let outputImage = currentFilter.outputImage else { return }
         guard let cgImage = context.createCGImage(outputImage, from: outputImage.extent) else { return }
@@ -112,7 +130,7 @@ struct ContentView: View {
         applyImageProcessing()
         filterCount += 1
         if filterCount >= 5 {
-            requestReview()
+//            requestReview()
         }
     }
 }
