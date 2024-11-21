@@ -12,7 +12,7 @@ The source learning is from 13th project of course "100 Days of SwiftUI" (https:
 4. Allow users to share the filtered image with others.
 5. Create an intuitive and seamless user experience for working with image filters.
 
-# WeSplit – Image Comments Feature
+# Instafilter – Image Comments Feature
 ![Image Main Empty UI](image-main-empty-ui.png)
 ![Image Main Image UI](image-main-image-ui.png)
 ![Image Main Filter UI](image-main-filter-ui.png)
