@@ -2,7 +2,7 @@
 This is a basic learning project to create an app that allows users to change image filters. The app provides a simple interface where users can input an image, apply filters to modify its appearance, and share the edited image.
 
 ---
-The source learning is from 12th project of course "100 Days of SwiftUI" (https://www.hackingwithswift.com/100/swiftui)
+The source learning is from 13th project of course "100 Days of SwiftUI" (https://www.hackingwithswift.com/100/swiftui)
 
 ---
 ## Goals
